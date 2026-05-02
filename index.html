@@ -1,62 +1,13 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<title>チャット</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
-body { margin:0; font-family:sans-serif; }
-.chat { height:80vh; overflow:auto; padding:10px; }
-.msg { margin:5px; }
-</style>
-</head>
-
+<html>
 <body>
 
-<div id="chat" class="chat"></div>
-
-<input id="name" placeholder="名前">
-<input id="msg">
-<button onclick="send()">送信</button>
+<button onclick="send()">テスト</button>
 
 <script>
-const supabase = window.supabase.createClient(
-  "https://xiotksilwbtlohnzpyeu.supabase.co",
-  "sb_publishable_csKKoGAtTFnh0MjAxrD_qQ_9YeWP96Y"
-);
-
-async function send() {
-  alert("動作OK");
-
-  const name = document.getElementById("name").value || "名無し";
-  const msg = document.getElementById("msg").value;
-
-  await supabase.from("posts").insert({
-    name: name,
-    message: msg,
-    time: Date.now()
-  });
-
-  load();
+function send(){
+  alert("動いた！");
 }
-
-async function load() {
-  const { data } = await supabase.from("posts").select("*");
-
-  const chat = document.getElementById("chat");
-  chat.innerHTML = "";
-
-  data.forEach(p => {
-    const div = document.createElement("div");
-    div.className = "msg";
-    div.textContent = p.name + " : " + p.message;
-    chat.appendChild(div);
-  });
-}
-
-load();
 </script>
 
 </body>
